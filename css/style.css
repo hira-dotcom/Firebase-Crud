@@ -10,7 +10,7 @@ body {
 header {
     width: 100%;
     height: 100vh;
-    background: url(../img/bg3.jpg) no-repeat 50% 50%;
+    background: blueviolet;
     background-size: cover;
 }
 .content {

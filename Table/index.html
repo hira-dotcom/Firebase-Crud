@@ -5,110 +5,69 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Table for Database</title>
-<link rel="stylesheet" href="../css/Table_Style.css">
-<link rel="stylesheet" href="../css/bootstrap.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<style>
-h2{
-    color: black;
-}
-a{
-    color: black;
-}
-</style>
 </head>
 <body>
+    <script src="../javascript/index.js"></script>
+    <link rel="stylesheet" href="../css/table-style.css">
     <section class="hero-banner">
         <div class="container">
             <h2 align ="center">Manage Employee</h2>
             <div aria-label="breadcrumb1" class="banner-breadcrumb">
                 <ol class="breadcrumb1">
                     <li class="breadcrumb1-item"><a href="../">Home</a></li>
-                    <li class="breadcrumb1-item"><a href="#">/</a></li>
+                    <li class="breadcrumb1-item"><a>/</a></li>
                     <li class="breadcrumb1-item active" aria-current="page">Table</li>
                 </ol>
                 <hr>
             </div>
         </div>
     </section>
-			<div class="contaniner">
-                <div class="row">
-                    <div class="table-wrapper">
-                    <!--Table Start-->
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Sr.</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Tom</td>
-                                <td>tom@mail.com</td>
-                                <td>89 CN Rd, Cartoon Networks, USA</td>
-                                <td>(171) 555-2222</td>
-                                <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jerry</td>
-                                <td>MR.Jerry@mail.com</td>
-                                <td>89 CN Rd, Cartoon Networks, USA</td>
-                                <td>(313) 555-5735</td>
-                                <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Garfield</td>
-                                <td>Garfield@mail.com</td>
-                                <td>89 CN Rd, Cartoon Networks, USA</td>
-                                <td>(503) 555-9931</td>
-                                <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Harry Poter</td>
-                                <td>Harry Poter@mail.com</td>
-                                <td>22 CN Rd, Hogwarts School, United Kingdom</td>
-                                <td>(204) 619-5731</td>
-                                <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>					
-                            <tr>
-                                <td>5</td>
-                                <td>Mariposa</td>
-                                <td>barbie mariposa@mail.com</td>
-                                <td>22 CN Rd, Disney Land, United Kingdom</td>
-                                <td>(480) 631-2097</td>
-                                <td>
-                                    <a href="#" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                </div>
-       </div>
-     </div>
+    <table>
+        <tr>
+            <td>
+                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                    <div>
+                        <label>Full Name*</label><label class="validation-error hide" id="fullNameValidationError">This field is required.</label>
+                        <input type="text" name="fullName" id="fullName">
+                    </div>
+                    <div>
+                        <label>EMP Code</label>
+                        <input type="text" name="empCode" id="empCode">
+                    </div>
+                    <div>
+                        <label>Salary</label>
+                        <input type="text" name="salary" id="salary">
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input type="text" name="city" id="city">
+                    </div>
+                    <div  class="form-action-buttons">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </td>
+            <td>
+                <table class="list" id="employeeList">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>EMP Code</th>
+                            <th>Salary</th>
+                            <th>City</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
