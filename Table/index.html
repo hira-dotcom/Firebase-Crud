@@ -1,73 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Table for Database</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Document</title>
 </head>
 <body>
-    <script src="../javascript/index.js"></script>
-    <link rel="stylesheet" href="../css/table-style.css">
-    <section class="hero-banner">
-        <div class="container">
-            <h2 align ="center">Manage Employee</h2>
-            <div aria-label="breadcrumb1" class="banner-breadcrumb">
-                <ol class="breadcrumb1">
-                    <li class="breadcrumb1-item"><a href="../">Home</a></li>
-                    <li class="breadcrumb1-item"><a>/</a></li>
-                    <li class="breadcrumb1-item active" aria-current="page">Table</li>
-                </ol>
-                <hr>
-            </div>
-        </div>
-    </section>
-    <table>
-        <tr>
-            <td>
-                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
-                    <div>
-                        <label>Full Name*</label><label class="validation-error hide" id="fullNameValidationError">This field is required.</label>
-                        <input type="text" name="fullName" id="fullName">
-                    </div>
-                    <div>
-                        <label>EMP Code</label>
-                        <input type="text" name="empCode" id="empCode">
-                    </div>
-                    <div>
-                        <label>Salary</label>
-                        <input type="text" name="salary" id="salary">
-                    </div>
-                    <div>
-                        <label>City</label>
-                        <input type="text" name="city" id="city">
-                    </div>
-                    <div  class="form-action-buttons">
-                        <input type="submit" value="Submit">
-                    </div>
-                </form>
-            </td>
-            <td>
-                <table class="list" id="employeeList">
-                    <thead>
-                        <tr>
-                            <th>Full Name</th>
-                            <th>EMP Code</th>
-                            <th>Salary</th>
-                            <th>City</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <main>
+        <form action="">
+            <label for="userId"></label>
+            <input type="text" placeholder="uer id" id="userId">
+            <label for="firstname"></label>
+            <input type="text" placeholder="user name" id="firstname">
+            <label for="lastname"></label>
+            <input type="text" placeholder="lastname" id="lastname">
+            <label for="email"></label>
+            <input type="email" placeholder="email" id="email">
+            <label for="password"></label>
+            <input type="password" placeholder="password" id="password">
+            <button id="addBtn" class="btn waves-effect waves-light">add</button>
+            <button id="updateBtn" class="btn waves-effect waves-light">update</button>
+            <button id="removeBtn" class="btn waves-effect red dark-1">remove</button>
+        </form>
+    </main>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
 
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBTP97aYefZFkSbgnJl27uAoqOxkBYnG04",
+    authDomain: "hira-crud-firebase.firebaseapp.com",
+    projectId: "hira-crud-firebase",
+    storageBucket: "hira-crud-firebase.appspot.com",
+    messagingSenderId: "51340042279",
+    appId: "1:51340042279:web:be65627efa2741e2b66e02"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="../javascript/Index.js"></script>
 </body>
 </html>

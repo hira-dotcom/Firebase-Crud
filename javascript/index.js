@@ -1,99 +1,45 @@
-var selectedRow = null
+const userId = document.getElementById('userId');
+const firstName = document.getElementById('firstname');
+const lastName = document.getElementById('lastname');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const addBtn = document.getElementById('addBtn');
+const updateBtn = document.getElementById('updateBtn');
+const removeBtn = document.getElementById('removeBtn');
 
-function onFormSubmit() {
-    if (validate()) {
-        var formData = readFormData();
-        if (selectedRow == null)
-            insertNewRecord(formData);
-        else
-            updateRecord(formData);
-        resetForm();
-    }
-}
+const database = firebase.database();
+const rootRef = database.ref('student');
 
-function readFormData() {
-    var formData = {};
-    formData["fullName"] = document.getElementById("fullName").value;
-    formData["empCode"] = document.getElementById("empCode").value;
-    formData["salary"] = document.getElementById("salary").value;
-    formData["city"] = document.getElementById("city").value;
-    return formData;
-}
+addBtn.addEventListener('click',(ev)=>{
+ev.preventDefault();
+rootRef.child(userId.value).set({
+    First_name:firstName.value,
+    Last_name:lastName.value,
+    Email:email.value,
+    Password:password.value
+});
 
-function insertNewRecord(data) {
-    var table = document.getElementById("employeeList").getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow(table.length);
-    cell1 = newRow.insertCell(0);
-    cell1.innerHTML = data.fullName;
-    cell2 = newRow.insertCell(1);
-    cell2.innerHTML = data.empCode;
-    cell3 = newRow.insertCell(2);
-    cell3.innerHTML = data.salary;
-    cell4 = newRow.insertCell(3);
-    cell4.innerHTML = data.city;
-    cell4 = newRow.insertCell(4);
-    cell4.innerHTML = `<a onClick="onEdit(this)">Edit</a>
-                       <a onClick="onDelete(this)">Delete</a>`;
-}
+});
+updateBtn.addEventListener('click',(ev)=>{
+ev.preventDefault();
+const newData = {
+    Password: password.value,
+    First_name:firstName.value,
+    Last_name:lastName.value,
+    Email:email.value
+};
+const updates = {};
+updates['/student/' + userId.value] = newData;
+updates['/Updated-student/' + userId.value] = newData;
+database.ref().update(updates);
+});
 
-function resetForm() {
-    document.getElementById("fullName").value = "";
-    document.getElementById("empCode").value = "";
-    document.getElementById("salary").value = "";
-    document.getElementById("city").value = "";
-    selectedRow = null;
-}
-
-function onEdit(td) {
-    selectedRow = td.parentElement.parentElement;
-    document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
-    document.getElementById("empCode").value = selectedRow.cells[1].innerHTML;
-    document.getElementById("salary").value = selectedRow.cells[2].innerHTML;
-    document.getElementById("city").value = selectedRow.cells[3].innerHTML;
-}
-function updateRecord(formData) {
-    selectedRow.cells[0].innerHTML = formData.fullName;
-    selectedRow.cells[1].innerHTML = formData.empCode;
-    selectedRow.cells[2].innerHTML = formData.salary;
-    selectedRow.cells[3].innerHTML = formData.city;
-}
-
-function onDelete(td) {
-    if (confirm('Are you sure to delete this record ?')) {
-        row = td.parentElement.parentElement;
-        document.getElementById("employeeList").deleteRow(row.rowIndex);
-        resetForm();
-    }
-}
-function validate() {
-    isValid = true;
-    if (document.getElementById("fullName").value == "") {
-        isValid = false;
-        document.getElementById("fullNameValidationError").classList.remove("hide");
-    } else {
-        isValid = true;
-        if (!document.getElementById("fullNameValidationError").classList.contains("hide"))
-            document.getElementById("fullNameValidationError").classList.add("hide");
-    }
-    return isValid;
-}
- // Menu-toggle button
-
-      $(document).ready(function() {
-        $(".menu-icon").on("click", function() {
-              $("nav ul").toggleClass("showing");
-        });
-  });
-
-  // Scrolling Effect
-
-  $(window).on("scroll", function() {
-        if($(window).scrollTop()) {
-              $('nav').addClass('black');
-        }
-
-        else {
-              $('nav').removeClass('black');
-        }
-  })
-
+removeBtn.addEventListener('click',ev=>{
+ev.preventDefault();
+rootRef.child(userId.value).remove().then(()=>{
+    window.alert('user removed from database');
+})
+.catch(error=>{
+    console.error(error);
+})
+});
